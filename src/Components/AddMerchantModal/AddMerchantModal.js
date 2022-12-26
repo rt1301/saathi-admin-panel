@@ -5,6 +5,7 @@ import { createMerchants } from '../../api/request';
 
 function AddMerchantModal({ open, setIsOpen, successAddMerchant }) {
   const handleClose = () => {
+    form.reset();
     setIsOpen(false);
   }
   
@@ -22,7 +23,7 @@ function AddMerchantModal({ open, setIsOpen, successAddMerchant }) {
       logoUrl: (val) => val.length > 0 ? null : "Invalid URL",
       url: (val) => val.length > 0 ? null : "Invalid URL",
       desc: (val) => val.length > 0 ? null : "Invalid description",
-      offerAmt: (val) => val > 0 ? null : "Invalid Offer",
+      offerAmt: (val) => val >= 0 ? null : "Invalid Offer",
       offerType: (val) => val.length>0 ? null : "Invalid Offer Type"
     }
   })
@@ -31,8 +32,9 @@ function AddMerchantModal({ open, setIsOpen, successAddMerchant }) {
     const res = await createMerchants(data);
     if(res.code === 200){
       successAddMerchant();
+      handleClose();
     }else{
-      setIsOpen(false);
+      handleClose();
     }
   }
   return (

@@ -43,6 +43,9 @@ function AddProductModal({ open, setIsOpen, successAddProduct }) {
     }
     
     const handleClose = () => {
+        form.reset();
+        setTags([]);
+        setTabs([-1]);
         setIsOpen(false);
     }
 
@@ -101,9 +104,9 @@ function AddProductModal({ open, setIsOpen, successAddProduct }) {
         const res = await createProducts(data);
         if (res.code === 200) {
             successAddProduct();
-            form.reset();
+            handleClose();
         } else {
-            setIsOpen(false);
+            handleClose();
         }
 
     }

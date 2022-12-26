@@ -18,7 +18,7 @@ const helperFunc = async (routeLoc, data, reqmethod) => {
                     return status < 500;
                 },
             });
-            console.log(result);
+            // console.log(result);
         }
         if (reqmethod === 'put') {
             result = await Client.put(routeLoc, data, {

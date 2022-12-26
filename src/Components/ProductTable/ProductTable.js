@@ -50,7 +50,7 @@ function ProductTable() {
 
     const successAddProduct = () => {
         fetchProducts();
-        setOpen(false);
+        // setOpen(false);
     }
 
     const successUpdateProduct = () => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Grid, Image, Title, Paper, Button, ScrollArea } from '@mantine/core'
+import { Box, Grid, Image, Title, Paper, Button, ScrollArea, Group } from '@mantine/core'
 
 import { getOneProduct } from '../../api/request'
 
@@ -13,7 +13,6 @@ function ShowProduct({ id, setShow }) {
         try {
             const res = await getOneProduct(id);
             if (res.code === 200) {
-                // console.log(res.data);
                 let d = res.data;
                 d["merchant"] = d["merchant"][0].name;
                 setProduct(res.data);
@@ -47,6 +46,35 @@ function ShowProduct({ id, setShow }) {
                         <Paper shadow="sm">
                             {product?.desc}
                         </Paper>
+                    </Grid.Col>
+                    <Grid.Col span={12}>
+                        <p style={{fontWeight:"bold"}}>Tags</p>
+                        <Group>
+                            {product?.tag?.map((ele, id) => {
+                                return (
+                                    <Box ta="center" px={5} miw={50} sx={{ border: "1px solid white" }} mx={5}>
+                                        {ele}
+                                    </Box>
+                                )
+                            })}
+                        </Group>
+                    </Grid.Col>
+                    <Grid.Col span={12}>
+                        <p style={{ fontWeight: "bold" }}>Parameters</p>
+                        <Grid>
+                            {Object.entries(product?.parameters || {}).map((ele,id)=>{
+                                return(
+                                    <>
+                                        <Grid.Col fw="bold" span={6}>
+                                            {ele[0]}
+                                        </Grid.Col>
+                                        <Grid.Col fw="bold" span={6}>
+                                            {ele[1]}
+                                        </Grid.Col>
+                                    </>
+                                )
+                            })}
+                        </Grid>
                     </Grid.Col>
                     <Grid.Col span={12}>
                         <Paper shadow="sm">

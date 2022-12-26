@@ -44,7 +44,7 @@ function MerchantTable() {
 
   const successAddMerchant = () => {
     fetchMerchants();
-    setOpen(false);
+    // setOpen(false);
   }
 
   const successUpdateMerchant = () => {
